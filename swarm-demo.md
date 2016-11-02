@@ -28,6 +28,46 @@ docker network create \
 # Build Docker images
 
 ````sh
+# Build ale-demo-aspnet and publish to Docker Hub
 docker build -t egoalesum/ale-demo-aspnet ale-demo-aspnet
+docker push egoalesum/ale-demo-aspnet
+
+# Build ale-demo-proxy and publish to Docker Hub
 docker build -t egoalesum/ale-demo-proxy ale-demo-proxy
+docker push egoalesum/ale-demo-proxy
+````
+
+# Launch services
+
+````sh
+docker service create \
+  --name webapp \
+  --network demo-net \
+  --publish 5000:5000 \
+  egoalesum/ale-demo-aspnet
+
+docker service create \
+  --name proxy \
+  --network demo-net \
+  --publish 80:80 \
+  egoalesum/ale-demo-proxy
+````
+
+# Have fun
+
+````sh
+# Check status
+docker service ls
+
+# Scale services
+docker service scale webapp=2 proxy=2
+````
+
+# Cleanup
+
+````sh
+docker service rm webapp
+docker service rm proxy
+docker network rm demo-net
+docker swarm leave --force
 ````
