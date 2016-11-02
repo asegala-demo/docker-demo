@@ -58,6 +58,8 @@ docker service create \
   egoalesum/ale-demo-proxy
 ````
 
+Then open the public IP of **any** server to view the website.
+
 # Have fun
 
 ````sh
@@ -66,6 +68,9 @@ docker service ls
 
 # Scale services
 docker service scale webapp=2 proxy=2
+
+# Test node failure, on one server
+sudo systemctl docker stop
 ````
 
 # Cleanup
