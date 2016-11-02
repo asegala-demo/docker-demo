@@ -15,7 +15,7 @@ namespace demo_aspnet.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = System.Environment.MachineName;
 
             return View();
         }
