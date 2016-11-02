@@ -1,0 +1,19 @@
+version: '2'
+services:
+  proxy:
+    image: ale-demo-proxy
+    networks:
+      - demo
+    ports:
+      - "80:80"
+    depends_on:
+      - dotnetapp
+  dotnetapp:
+    networks:
+      - demo
+    image: ale-demo-aspnet
+
+networks:
+  demo:
+    external:
+      name: demo-net
