@@ -40,6 +40,11 @@ docker push egoalesum/ale-demo-proxy
 # Launch services
 
 ````sh
+# Pull images for quicker startup
+docker pull egoalesum/ale-demo-aspnet
+docker pull egoalesum/ale-demo-proxy
+
+# Launch services
 docker service create \
   --name webapp \
   --network demo-net \
